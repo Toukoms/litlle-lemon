@@ -4,11 +4,16 @@ import { HomePage } from "./modules/home/page";
 import { CustomerDetailsPage } from "./modules/reservations/customer-details/page";
 import { ReservationsPage } from "./modules/reservations/page";
 import { PaymentPage } from "./modules/reservations/payment/page";
+import { ErrorBoundary } from "./modules/shared/ui/Error";
+import { Loading } from "./modules/shared/ui/Loading";
+import { NotFound } from "./modules/shared/ui/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    ErrorBoundary: ErrorBoundary,
+    HydrateFallback: Loading,
     children: [
       {
         index: true,
@@ -30,6 +35,10 @@ const router = createBrowserRouter([
             Component: PaymentPage,
           },
         ],
+      },
+      {
+        path: "*",
+        Component: NotFound,
       },
     ],
   },
