@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Body from "../shared/ui/Body";
 
 function ReservationHeading() {
@@ -14,6 +15,7 @@ function ReservationHeading() {
 }
 
 export function ReservationsPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     date: "",
     time: "",
@@ -23,8 +25,10 @@ export function ReservationsPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Navigate to confirmation page
-    console.log("Reservation data:", formData);
+    // Navigate to customer details page with reservation data
+    navigate("/reservations/customer-details", {
+      state: { reservationData: formData },
+    });
   };
 
   const handleChange = (
@@ -144,7 +148,7 @@ export function ReservationsPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-6 py-3 font-bold text-black bg-yellow-400 rounded-md hover:bg-yellow-500 transition-colors duration-200"
+            className="w-full px-6 py-3 font-bold text-black bg-yellow-400 rounded-md hover:bg-yellow-500 transition-colors duration-200 cursor-pointer"
           >
             Continue
           </button>
