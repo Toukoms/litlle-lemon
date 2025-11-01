@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Body from "../../shared/ui/Body";
 
 function CustomerDetailsHeading() {
@@ -14,6 +14,7 @@ function CustomerDetailsHeading() {
 }
 
 export function CustomerDetailsPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const reservationData = location.state?.reservationData;
 
@@ -49,14 +50,13 @@ export function CustomerDetailsPage() {
       return;
     }
 
-    // TODO: Submit reservation with customer details
-    console.log("Complete reservation:", {
-      ...reservationData,
-      customer: formData,
+    // Navigate to payment page with reservation and customer data
+    navigate("/reservations/payment", {
+      state: {
+        reservationData: reservationData,
+        customerData: formData,
+      },
     });
-
-    // TODO: Navigate to confirmation page
-    alert("Reservation confirmed!");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

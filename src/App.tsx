@@ -3,6 +3,7 @@ import { RootLayout } from "./modules";
 import { HomePage } from "./modules/home/page";
 import { CustomerDetailsPage } from "./modules/reservations/customer-details/page";
 import { ReservationsPage } from "./modules/reservations/page";
+import { PaymentPage } from "./modules/reservations/payment/page";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
           {
             path: "customer-details",
             Component: CustomerDetailsPage,
+          },
+          {
+            path: "payment",
+            Component: PaymentPage,
           },
         ],
       },
