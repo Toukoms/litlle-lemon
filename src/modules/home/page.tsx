@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Body from "../shared/ui/Body";
 
 function Heading() {
@@ -10,12 +11,12 @@ function Heading() {
           Mediterranean restaurant, focused on traditionnal recipes served with
           a modern twist.
         </p>
-        <button
-          type="button"
-          className="px-6 py-2 font-bold bg-yellow-400 text-black rounded-md"
+        <Link
+          to="/reservations"
+          className="inline-block px-6 py-2 font-bold bg-yellow-400 text-black rounded-md hover:bg-yellow-500 transition-colors"
         >
           Reserve a table
-        </button>
+        </Link>
       </div>
       <div className="size-48 rounded-md overflow-hidden">
         <img
