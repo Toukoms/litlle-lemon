@@ -37,24 +37,28 @@ export function CustomerDetailsPage() {
 
     // Validate all required fields
     const newErrors = {
-      firstName: formData.firstName.trim() === "",
-      lastName: formData.lastName.trim() === "",
-      email: formData.email.trim() === "",
-      phone: formData.phone.trim() === "",
+      firstName: !formData.firstName.trim(),
+      lastName: !formData.lastName.trim(),
+      email: !formData.email.trim(),
+      phone: !formData.phone.trim(),
     };
 
-    setErrors(newErrors);
-
-    // If any errors, don't submit
+    // If any errors, set them and don't submit
     if (Object.values(newErrors).some((error) => error)) {
+      setErrors(newErrors);
       return;
     }
 
-    // Navigate to payment page with reservation and customer data
+    // Navigate to payment page with reservation and customer data (use trimmed values)
     navigate("/reservations/payment", {
       state: {
         reservationData: reservationData,
-        customerData: formData,
+        customerData: {
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+        },
       },
     });
   };
@@ -78,7 +82,7 @@ export function CustomerDetailsPage() {
   return (
     <Body heading={CustomerDetailsHeading}>
       <div className="p-6 max-w-md mx-auto">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
           {/* First Name */}
           <div className="space-y-2">
             <label
